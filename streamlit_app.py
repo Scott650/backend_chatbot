@@ -12,7 +12,6 @@ from src.agent import run_agent
 im = Image.open("src/assets/favicon.png")
 st.set_page_config(page_title='AI-Architect', page_icon=im, initial_sidebar_state="auto", menu_items=None)
 st.title("AWS Google Search Agent")
-st.caption('This AI tool use Langchain, OpenAI, Google search API and AutoGPT to develop an action plan with AWS Cloudformation/SAM Templates')
 
 # if you just want to use the .env file, uncomment the following lines
 # from decouple import config
@@ -86,15 +85,15 @@ with st.sidebar.expander('Advanced Settings ⚙️', expanded=False):
 col1, col2 = st.columns(2)
 ## Assistant ROLE types
 assistant_role_name = col1.selectbox('What is the AI Assistant Role Name?',
-    ('Solutions Architect', 'Product Researcher', 'DynamoDB Expert'))
+    ('Product Researcher', 'Market Researcher'))
 #st.write('You selected:', assistant_role_name)
 
 ## User ROLE
 user_role_name = col2.selectbox('What is the User Role Name?',
-    ('CTO', 'Product Manager', 'Engineering Manager'))
+    ('Product Manager', 'Customer'))
 
 ## Question area with sample
-task = st.text_area("Task", "Develop a SAM template to deploy an Amazon API Gateway HTTP API with a Lambda integration.")
+task = st.text_area("Task", "")
 word_limit = st.number_input("Word Limit", 10, 1500, 100)
 task_specifier_prompt = f"""Here is a task that {assistant_role_name} will help {user_role_name} to complete: {task}.
     Please make it more specific.
