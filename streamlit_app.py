@@ -9,6 +9,13 @@ from constants import (
 )
 from src.agent import run_agent
 
+from dotenv import load_dotenv
+load_dotenv()
+
+OPENAI_API_KEY =os.getenv("OPENAI_API_KEY")
+GOOGLE_API_KEY =os.getenv("GOOGLE_API_KEY")
+GOOGLE_CSE_ID =os.getenv("GOOGLE_CSE_ID")
+
 im = Image.open("src/assets/favicon.png")
 st.set_page_config(page_title='AI-Architect', page_icon=im, initial_sidebar_state="auto", menu_items=None)
 st.title("AWS Google Search Agent")
@@ -21,30 +28,14 @@ st.title("AWS Google Search Agent")
 #     os.environ["google_cse_id"] = config('google_cse_id')
 
 st.sidebar.title("Configuration")
-st.sidebar.subheader("Enter Your API Keys 🗝️")
 #OPEN API KEY
-open_api_key = st.sidebar.text_input(
-    "Open API Key", 
-    value=st.session_state.get('open_api_key', ''),
-    help="Get your API key from https://platform.openai.com/account/api-keys",
-    type='password'
-)
+open_api_key = OPENAI_API_KEY
 os.environ["OPENAI_API_KEY"] = open_api_key
 #GOOGLE API KEY
-google_api_key = st.sidebar.text_input(
-    "Google Search API Key", 
-    value=st.session_state.get('google_api_key', ''),
-    help="Get your API key from https://developers.google.com/custom-search/v1/overview/",
-    type='password'
-)
+google_api_key = GOOGLE_API_KEY
 os.environ["GOOGLE_API_KEY"] = google_api_key
 #GOOGLE CSE ID
-google_cse_id = st.sidebar.text_input(
-    "Google CSE ID", 
-    value=st.session_state.get('google_cse_id', ''),
-    help="Get your CSE ID from https://cse.google.com/cse/create/new/",
-    type='password'
-)
+google_cse_id = GOOGLE_CSE_ID
 os.environ["GOOGLE_CSE_ID"] = google_cse_id
 
 #Setting the sessions
@@ -93,7 +84,7 @@ user_role_name = col2.selectbox('What is the User Role Name?',
     ('Product Manager', 'Customer'))
 
 ## Question area with sample
-task = st.text_area("Task", "")
+task = st.text_area("Question", "")
 word_limit = st.number_input("Word Limit", 10, 1500, 100)
 task_specifier_prompt = f"""Here is a task that {assistant_role_name} will help {user_role_name} to complete: {task}.
     Please make it more specific.
@@ -102,7 +93,7 @@ user_input = task_specifier_prompt ## Temp for testing
 
 if st.button('Start Autonomus AI Architect'):
     if user_input != "" and (open_api_key == '' or google_api_key == '' or google_cse_id == ''):
-        st.error("Please enter your API keys in the sidebar")
+        st.error("API Error!")
     elif user_input != "":
         run_agent(
             user_input=user_input,

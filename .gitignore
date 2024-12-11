@@ -16,3 +16,4 @@ agent-gpt
 bin
 etc
 lib
+.env

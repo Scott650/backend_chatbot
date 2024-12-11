@@ -87,3 +87,4 @@ wcwidth==0.2.6
 yarl==1.9.1
 zipp==3.15.0
 google-api-python-client == 2.86.0
+python-dotenv
