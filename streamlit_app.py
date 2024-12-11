@@ -11,7 +11,7 @@ from src.agent import run_agent
 
 im = Image.open("src/assets/favicon.png")
 st.set_page_config(page_title='AI-Architect', page_icon=im, initial_sidebar_state="auto", menu_items=None)
-st.title("AWS AutoGPT+Google Search Assistant")
+st.title("AWS Google Search Agent")
 st.caption('This AI tool use Langchain, OpenAI, Google search API and AutoGPT to develop an action plan with AWS Cloudformation/SAM Templates')
 
 # if you just want to use the .env file, uncomment the following lines
