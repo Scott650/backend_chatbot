@@ -88,7 +88,7 @@ task_specifier_prompt = f"""Here is a task that {assistant_role_name} will help 
     Please reply with the specified task in {word_limit} words or less."""
 user_input = task_specifier_prompt ## Temp for testing
 
-if st.button('Start Autonomus AI Architect'):
+if st.button('Submit'):
     if user_input != "" and (open_api_key == '' or google_api_key == '' or google_cse_id == ''):
         st.error("API Error!")
     elif user_input != "":
