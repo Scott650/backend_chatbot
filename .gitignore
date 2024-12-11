@@ -1,0 +1,18 @@
+# Folder view configuration files
+.DS_Store
+Desktop.ini
+
+# Thumbnail cache files
+._*
+Thumbs.db
+open_source_BP.md
+
+# Compiled Python files
+*.pyc
+
+# Application specific files
+venv
+agent-gpt
+bin
+etc
+lib
